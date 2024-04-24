@@ -3,7 +3,7 @@
     background-color: #f7f7f7;
     text-align: center;
     padding-top: 50px;
-    zoom:150%;
+    zoom:120%;
   }
 
   #youtubeUrl {
@@ -60,9 +60,3 @@
     position: relative;
 }
 
-#progressText {
-    position: absolute;
-    width: 100%;
-    text-align: center;
-    line-height: 20px; /* Match the height of the progress bar */
-}

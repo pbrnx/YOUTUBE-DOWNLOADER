@@ -6,8 +6,20 @@ function sortResolutions(resolutions) {
     });
 }
 
+// Função para atualizar a barra de progresso
+function updateProgressBar(percent) {
+    document.getElementById('progressBar').style.width = percent + '%';
+}
+
+// Função para desabilitar ou habilitar os botões
+function setButtonsDisabled(disabled) {
+    document.getElementById('fetchResolutionsButton').disabled = disabled;
+    document.getElementById('downloadButton').disabled = disabled;
+}
+
 document.getElementById('fetchResolutionsButton').onclick = function() {
     var url = document.getElementById('youtubeUrl').value;
+    setButtonsDisabled(true); // Desabilita os botões para prevenir cliques múltiplos
     fetch('/get_resolutions', {
         method: 'POST',
         headers: {
@@ -17,6 +29,7 @@ document.getElementById('fetchResolutionsButton').onclick = function() {
     })
     .then(response => response.json())
     .then(resolutionsData => {
+        setButtonsDisabled(false); // Habilita os botões novamente
         if (resolutionsData.error) {
             document.getElementById('message').textContent = resolutionsData.error;
         } else {
@@ -51,40 +64,9 @@ document.getElementById('fetchResolutionsButton').onclick = function() {
     .catch(error => {
         console.error('Error:', error);
         document.getElementById('message').textContent = 'An error occurred.';
+        setButtonsDisabled(false); // Habilita os botões novamente
     });
 };
-
-document.getElementById('downloadButton').onclick = function() {
-    var url = document.getElementById('youtubeUrl').value;
-    var resolution = document.querySelector('input[name="resolution"]:checked').value;
-
-    document.getElementById('message').textContent = 'Processing download...';
-
-    fetch('/download', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: 'url=' + encodeURIComponent(url) + '&resolution=' + encodeURIComponent(resolution)
-    })
-    .then(response => response.json())
-    .then(data => {
-        if(data.error) {
-            document.getElementById('message').textContent = data.error;
-        } else {
-            // Se o arquivo foi baixado com sucesso, inicia o download no navegador
-            window.location.href = '/downloads/' + encodeURIComponent(data.filename);
-            document.getElementById('message').textContent = 'Your download will begin shortly.';
-        }
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        document.getElementById('message').textContent = 'An error occurred during the download.';
-    });
-};
-
-
-
 
 document.getElementById('downloadButton').onclick = function() {
     var url = document.getElementById('youtubeUrl').value;
@@ -93,6 +75,7 @@ document.getElementById('downloadButton').onclick = function() {
     document.getElementById('message').textContent = 'Processing download...';
     document.getElementById('progressContainer').style.display = 'block';
     document.getElementById('progressBar').style.width = '0%'; // Reset the progress bar
+    setButtonsDisabled(true); // Desabilita os botões para prevenir cliques múltiplos
 
     fetch('/download', {
         method: 'POST',
@@ -106,32 +89,18 @@ document.getElementById('downloadButton').onclick = function() {
         if(data.error) {
             document.getElementById('message').textContent = data.error;
             document.getElementById('progressContainer').style.display = 'none';
+            setButtonsDisabled(false); // Habilita os botões novamente
         } else {
             updateProgressBar(100);  // Simulate full progress
             window.location.href = '/downloads/' + encodeURIComponent(data.filename);
             document.getElementById('message').textContent = 'Your download will begin shortly.';
+            setButtonsDisabled(false); // Habilita os botões novamente
         }
     })
     .catch(error => {
         console.error('Error:', error);
         document.getElementById('message').textContent = 'An error occurred during the download.';
         document.getElementById('progressContainer').style.display = 'none';
+        setButtonsDisabled(false); // Habilita os botões novamente
     });
 };
-
-function updateProgressBar(percent) {
-    document.getElementById('progressBar').style.width = percent + '%';
-}
-
-// Example to simulate incremental progress
-function simulateProgress() {
-    let progress = 0;
-    const interval = setInterval(() => {
-        if (progress < 100) {
-            progress += 10;
-            updateProgressBar(progress);
-        } else {
-            clearInterval(interval);
-        }
-    }, 1000);
-}
