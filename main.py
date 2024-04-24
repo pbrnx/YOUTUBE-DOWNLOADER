@@ -42,6 +42,8 @@ def home():
     return render_template('teste.html')
     
 
+
+
 @app.route('/get_resolutions', methods=['POST'])
 def get_resolutions():
     url = request.form.get('url')
@@ -50,21 +52,20 @@ def get_resolutions():
     
     try:
         yt = YouTube(url)
-        # Get all video streams
         video_streams = yt.streams.filter(only_video=True).order_by('resolution').desc()
         resolutions = {stream.resolution for stream in video_streams if stream.resolution is not None}
         
-        return jsonify(list(resolutions))
+        # Adicionando extração de thumbnail e título
+        video_title = yt.title
+        video_thumbnail_url = yt.thumbnail_url
+        
+        return jsonify({
+            'resolutions': list(resolutions),
+            'title': video_title,
+            'thumbnail_url': video_thumbnail_url
+        })
     except Exception as e:
         return jsonify({'error': str(e)}), 500
-
-
-
-
-
-
-
-
 
 @app.route('/download', methods=['POST'])
 def download_video():
@@ -117,6 +118,7 @@ def download_file(filename):
     safe_filename = clean_filename(filename)
     try:
         response = send_from_directory(OUTPUT_FOLDER, safe_filename, as_attachment=True)
+
         clean_directories()
         return response
     except FileNotFoundError:

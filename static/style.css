@@ -3,6 +3,7 @@
     background-color: #f7f7f7;
     text-align: center;
     padding-top: 50px;
+    zoom:150%;
   }
 
   #youtubeUrl {
@@ -41,3 +42,27 @@
   #message {
     margin-top: 20px;
   }
+
+#progressContainer {
+    width: 300px; /* Mesma largura da imagem ou do campo de texto */
+    background-color: #ddd;
+    border-radius: 4px;
+    margin: 20px auto; /* Adiciona margem automática nos lados para centralizar */
+    overflow: hidden; /* Garante que a barra interna não ultrapasse as bordas arredondadas */
+}
+
+
+#progressBar {
+    height: 20px;
+    background-color: #1a8cff;
+    width: 0%; /* Inicializa a barra de progresso com 0% */
+    transition: width 0.5s ease; /* Suaviza a transição da largura */
+    position: relative;
+}
+
+#progressText {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    line-height: 20px; /* Match the height of the progress bar */
+}

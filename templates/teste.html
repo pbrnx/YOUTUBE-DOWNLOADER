@@ -11,13 +11,23 @@
 
 <body>
     <input type="text" id="youtubeUrl" placeholder="Enter YouTube URL">
-    <button id="fetchResolutionsButton">Get Resolutions</button>
+    <button id="fetchResolutionsButton">Search Video</button>
     <div id="resolutionsContainer">
         <ol id="resolutionList"></ol>
     </div>
     <button id="downloadButton" style="display:none;">Download Video</button>
     <p id="message"></p>
 
+    <div id="videoInfo">
+    <h3 id="videoTitle"></h3>
+    <img id="videoThumbnail" src="" style="width: 300px; border-radius: 5px;">
+</div>
+
+<div id="progressContainer" style="display:none; margin-top: 20px;">
+    <div id="progressBar" style="width: 0%; height: 20px; background-color: #1a8cff;">
+        <span id="progressText" style="color: white; text-align: center; display: block;">0%</span>
+    </div>
+</div>
     
 </body>
 </html>
