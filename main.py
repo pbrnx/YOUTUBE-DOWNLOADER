@@ -4,6 +4,7 @@ import os
 import string
 import subprocess
 import shutil
+from waitress import serve
 
 app = Flask(__name__)
 
@@ -104,6 +105,7 @@ def download_video():
         output_path
     ], check=True)
 
+
         else:
             # Para 720p e 360p, baixa o stream progressivo diretamente, pois o áudio não vem separado
             stream = yt.streams.filter(res=resolution, progressive=True).first()
@@ -127,4 +129,4 @@ def download_file(filename):
 
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=25565) 
+    serve(app, host='0.0.0.0', port=25565)
