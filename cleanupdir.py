@@ -20,7 +20,7 @@ def clean_output_directory():
             print(f'Falha ao deletar {file_path}. Motivo: {e}')
     print(f"Limpeza concluída para a pasta: {OUTPUT_FOLDER}")
 
-schedule.every(0.1).minutes.do(clean_output_directory)
+schedule.every(1).minutes.do(clean_output_directory)
 
 if __name__ == "__main__":
     while True:

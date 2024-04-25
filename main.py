@@ -101,10 +101,11 @@ def download_video():
                 '-c:v', 'copy',
                 '-c:a', 'aac',
                 '-strict', 'experimental',
-                output_path
-            ], check=True)
+        output_path
+    ], check=True)
+
         else:
-            # Para 720p e abaixo, baixa o stream progressivo diretamente
+            # Para 720p e 360p, baixa o stream progressivo diretamente, pois o áudio não vem separado
             stream = yt.streams.filter(res=resolution, progressive=True).first()
             stream.download(filename=output_filename, output_path=OUTPUT_FOLDER)
 
