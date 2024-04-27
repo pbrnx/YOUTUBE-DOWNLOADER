@@ -11,29 +11,32 @@
 
 <body>
   
-  <input id="youtubeUrl" type="text" placeholder="Enter YouTube URL here">
-<button id="fetchResolutionsButton" class="action-button">Fetch Resolutions</button>
-<div id="resolutionList"></div>
-<button id="downloadButton" class="action-button" style="display:none;">Download</button>
-<div id="message"></div>
+    <input id="youtubeUrl" type="text" placeholder="Enter YouTube URL here">
+    <button id="fetchResolutionsButton" class="action-button">Search Youtube Video</button>
 
+
+    <div id="listContainer">
+        <div id="resolutionList"></div>
+    </div>
+        
+        
+        
+    <button id="downloadButton" class="action-button" style="display:none;">Download</button>
     
 
-
-
-
+    
     <div id="videoInfo">
-    <h3 id="videoTitle"></h3>
+        <h3 id="videoTitle"></h3>
     <img id="videoThumbnail" src="" style="width: 300px; border-radius: 5px;">
     </div>
 
     <div id="progressContainer" style="display:none;">
-    <div id="progressBar"></div>
-</div>
+        <div id="progressBar"></div>
+    </div>
 
 
-
-<p id="message"></p>
+    <div id="message"></div>
+    <p id="message"></p>
 
 <footer>
     <div class="footer-content">

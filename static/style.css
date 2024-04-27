@@ -3,7 +3,6 @@
     background-color: #f7f7f7;
     text-align: center;
     padding-top: 50px;
-    zoom:120%;
   }
 
   #youtubeUrl {
@@ -24,6 +23,9 @@
     transition: background-color 0.3s ease;
     margin: 0 10px;
   }
+
+
+
 
   #fetchResolutionsButton:hover, #downloadButton:hover {
     background-color: #0066cc;
@@ -91,8 +93,15 @@ footer {
     transform: scale(1.2);
 }
 
+
+
+#listContainer {
+margin: 25px;
+}
+
+
 .resolution-button {
-    padding: 5px 10px;
+    padding: 10px 10px;
     margin: 5px;
     background-color: #1a8cff;
     color: white;
@@ -103,6 +112,7 @@ footer {
 
 .resolution-button.active, .resolution-button:hover {
     background-color: #0066cc;
+    
 }
 
 .action-button:hover {
