@@ -27,6 +27,8 @@
 
   #fetchResolutionsButton:hover, #downloadButton:hover {
     background-color: #0066cc;
+    transition: transform 0.3s ease;
+    transform: scale(1.05)
   }
 
   #resolutionList {
@@ -80,11 +82,31 @@ footer {
     width: 30px; /* Adjust size as needed */
     height: 30px; /* Adjust size as needed */
     margin: 0 10px;
-    transition: transform 0.3s ease;
+    transition: transform 0.5s ease;
     padding-left: 25px; 
     padding-right: 25px;
 }
 
 .social-icon:hover img {
-    transform: scale(1.1);
+    transform: scale(1.2);
 }
+
+.resolution-button {
+    padding: 5px 10px;
+    margin: 5px;
+    background-color: #1a8cff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.resolution-button.active, .resolution-button:hover {
+    background-color: #0066cc;
+}
+
+.action-button:hover {
+    transform: scale(1.05);
+}
+
+

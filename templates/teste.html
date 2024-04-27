@@ -10,36 +10,46 @@
 
 
 <body>
-    <input type="text" id="youtubeUrl" placeholder="Enter YouTube URL">
-    <button id="fetchResolutionsButton">Search Video</button>
-    <div id="resolutionsContainer">
-        <ol id="resolutionList"></ol>
-    </div>
-    <button id="downloadButton" style="display:none;">Download Video</button>
+  
+  <input id="youtubeUrl" type="text" placeholder="Enter YouTube URL here">
+<button id="fetchResolutionsButton" class="action-button">Fetch Resolutions</button>
+<div id="resolutionList"></div>
+<button id="downloadButton" class="action-button" style="display:none;">Download</button>
+<div id="message"></div>
+
     
+
+
+
 
     <div id="videoInfo">
     <h3 id="videoTitle"></h3>
     <img id="videoThumbnail" src="" style="width: 300px; border-radius: 5px;">
+    </div>
+
+    <div id="progressContainer" style="display:none;">
+    <div id="progressBar"></div>
 </div>
 
-<div id="progressContainer" style="display:none; margin-top: 20px;">
-    <div id="progressBar" style="width: 0%; height: 20px; background-color: #1a8cff;">
-       
-    </div>
-</div>
+
+
 <p id="message"></p>
 
 <footer>
     <div class="footer-content">
-        <a href="https://github.com/pbrnx" target="_blank" class="social-icon">
+        <a title="Aplicação no meu github!" href="https://github.com/pbrnx" target="_blank" class="social-icon">
             <img src="../static/Octicons-mark-github.svg" alt="GitHub">
         </a>
-        <a href="https://instagram.com/pbrnx" target="_blank" class="social-icon">
-            <img src="../static/Instagram_logo_2016.svg" alt="Instagram">
+        <a title="Contato Profissional" href="https://www.linkedin.com/in/pedro-augusto-barone-ba0122211/" target="_blank" class="social-icon">
+            <img src="../static/linkedin.svg" alt="Linkedin">
+        </a>
+       <a title="Acesse meu insta!" href="https://www.instagram.com/pbrnx" target="_blank" class="social-icon">
+            <img src="..\static\Instagram_logo_2016.svg" alt="Instagram">
         </a>
     </div>
 </footer>
+
+
 
     
 </body>
