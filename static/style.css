@@ -3,6 +3,7 @@
     background-color: #f7f7f7;
     text-align: center;
     padding-top: 50px;
+    zoom:120%;
   }
 
   #youtubeUrl {
@@ -10,7 +11,7 @@
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ddd;
-    border-radius: 4px;
+    border-radius: 10px;
   }
 
   #fetchResolutionsButton, #downloadButton {
@@ -18,18 +19,16 @@
     background-color: #1a8cff;
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 10px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: transform 0.3s ease;
     margin: 0 10px;
+    
   }
 
 
-
-
   #fetchResolutionsButton:hover, #downloadButton:hover {
-    background-color: #0066cc;
-    transition: transform 0.3s ease;
+    background-color: #00458a;
     transform: scale(1.05)
   }
 
@@ -66,8 +65,8 @@
 
 footer {
     width: 100%;
-    background-color: #696969;
-    color: white;
+    background-color: #393939;
+    color: #ffffff;
     text-align: center;
     padding: 20px 0;
     position: fixed;
@@ -90,7 +89,7 @@ footer {
 }
 
 .social-icon:hover img {
-    transform: scale(1.2);
+    transform: scale(1.4);
 }
 
 
@@ -106,17 +105,15 @@ margin: 25px;
     background-color: #1a8cff;
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 10px;
     cursor: pointer;
+    transition: background-color 0.2s ease;
 }
 
 .resolution-button.active, .resolution-button:hover {
-    background-color: #0066cc;
+    background-color: #00458a;
     
 }
 
-.action-button:hover {
-    transform: scale(1.05);
-}
 
 
