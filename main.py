@@ -6,6 +6,7 @@ import subprocess
 import shutil
 
 
+
 app = Flask(__name__)
 
 # Diretório onde os vídeos serão salvos após o download
@@ -127,5 +128,10 @@ def download_file(filename):
     except FileNotFoundError:
         return 'File not found', 404
     
-if __name__ == "__main__":
-    app.run()
+    
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=25565)
+    
+
+
+
