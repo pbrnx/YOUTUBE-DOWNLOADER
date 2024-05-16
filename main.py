@@ -17,6 +17,7 @@ OUTPUT_FOLDER = os.path.join(app.root_path, 'output')
 # Verifica e cria os diretórios de downloads e output, se necessário
 if not os.path.exists(DOWNLOAD_FOLDER):
     os.makedirs(DOWNLOAD_FOLDER)
+
 if not os.path.exists(OUTPUT_FOLDER):
     os.makedirs(OUTPUT_FOLDER)
 
@@ -33,17 +34,18 @@ def clean_directories():
             except Exception as e:
                 print(f'Failed to delete {file_path}. Reason: {e}')
 
+
 def clean_filename(filename):
     # Remove caracteres não permitidos para nomes de arquivos
     valid_chars = "-_.() %s%s" % (string.ascii_letters, string.digits)
     cleaned_filename = ''.join(c for c in filename if c in valid_chars)
     return cleaned_filename
 
+
 @app.route('/')
 def home():
-    return render_template('teste.html')
+    return render_template('index.html')
     
-
 
 
 @app.route('/get_resolutions', methods=['POST'])

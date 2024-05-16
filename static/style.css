@@ -3,7 +3,13 @@
     background-color: #f7f7f7;
     text-align: center;
     padding-top: 50px;
-    zoom:120%;
+    zoom:100%;
+  }
+
+  #videoThumbnail{
+    width: 400px;
+    border-radius: 20px;
+
   }
 
   #youtubeUrl {
