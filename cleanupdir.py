@@ -4,7 +4,7 @@ import schedule
 import time
 
 OUTPUT_FOLDER = 'output'
-
+print("Esse serviço limpa o diretório de outputs para evitar conflitos de arquivos já existentes.")
 def clean_output_directory():
     print(f"Iniciando a limpeza da pasta: {OUTPUT_FOLDER}")
     for filename in os.listdir(OUTPUT_FOLDER):
