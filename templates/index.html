@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title> Y2DOWN - Download YouTube Videos</title>
+<title>Y2DOWN - Download YouTube Videos</title>
 <link rel="stylesheet" type="text/css" href="../static/style.css" />
 <script type="text/javascript" src="../static/script.js" defer></script>
 <link rel="icon" type="image/x-icon" href="/static/logo.png">
@@ -11,19 +11,16 @@
 
 
 <body>
-  
     <input id="youtubeUrl" type="text" placeholder="Enter YouTube URL here">
-    <button id="fetchResolutionsButton" class="action-button">Search Youtube Video</button>
-
+    <button id="fetchResolutionsButton" class="action-button">Search YouTube Video</button>
 
     <div id="listContainer">
         <div id="resolutionList"></div>
     </div>
                 
-    <button id="downloadButton" class="action-button" style="display:none;">Download</button>
-    
+    <button id="downloadButton" class="action-button" style="display:none;">Download Video</button>
+    <button id="downloadAudioButton" class="action-button" style="display:none;">Download Audio</button>
 
-    
     <div id="videoInfo">
         <h3 id="videoTitle"></h3>
         <img id="videoThumbnail" src="">
@@ -32,7 +29,6 @@
     <div id="progressContainer" style="display:none;">
         <div id="progressBar"></div>
     </div>
-
 
     <div id="message"></div>
     <p id="message"></p>
@@ -51,8 +47,5 @@
     </div>
 </footer>
 
-
-
-    
 </body>
 </html>

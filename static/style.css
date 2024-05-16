@@ -20,7 +20,7 @@
     border-radius: 10px;
   }
 
-  #fetchResolutionsButton, #downloadButton {
+  #fetchResolutionsButton, #downloadButton, #downloadAudioButton {
     padding: 10px 20px;
     background-color: #1a8cff;
     color: white;
@@ -33,7 +33,7 @@
   }
 
 
-  #fetchResolutionsButton:hover, #downloadButton:hover {
+  #fetchResolutionsButton:hover, #downloadButton:hover, #downloadAudioButton:hover {
     background-color: #00458a;
     transform: scale(1.05)
   }
@@ -50,6 +50,7 @@
 
   #message {
     margin-top: 20px;
+    margin-bottom:200px;
   }
 
 #progressContainer {
