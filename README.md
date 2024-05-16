@@ -1,5 +1,5 @@
-#Personal Project
-##Youtube Video Downloader
+# Personal Project
+## Youtube Video Downloader
 
 This app has a python backend using the lib pytube to download videos directly from youtube lib. In order to use it, download FFMPEG essential and add it to windows path.
 Run the command 'pip install -r requirements.txt' to install the necessary libraries for the application to run.
