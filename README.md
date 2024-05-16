@@ -3,7 +3,7 @@
 
 This app has a python backend using the lib pytube to download videos directly from youtube lib. In order to use it, download FFMPEG essential and add it to windows path. Youtube only makes 360p and 720p videos with audio and video stream on a single file. For any other, including lower resolutions, the FFMPEG converter will be needed to gather the Video+Audio file that will be stored temporarily on the download folder.
 
-Run the command **'pip install -r requirements.txt'** to install the necessary libraries for the application to run (FFPMEG needs to be downloaded on the official website https://ffmpeg.org/download.html)
+Run the command **'pip install -r requirements.txt'** manually or simply run the batch file to install the necessary libraries for the application to run (FFPMEG needs to be downloaded on the official website https://ffmpeg.org/download.html)
 
 The application will be accessible on your public IP or on localhost using the port 25565. To make it accessible on onther devices, port forward the port 25565 on your router for both TCP and UDP protocols. Also, release this port on windows firewall.
 
