@@ -1,20 +1,20 @@
+import os
+import argparse
 from flask import Flask, render_template, request, jsonify, send_from_directory
 from pytube import YouTube
-import os
-import string
 import subprocess
+import string
 import shutil
 
-app = Flask(__name__)
+DOWNLOAD_FOLDER = 'downloads'
+OUTPUT_FOLDER = 'output'
 
-DOWNLOAD_FOLDER = os.path.join(app.root_path, 'downloads')
-OUTPUT_FOLDER = os.path.join(app.root_path, 'output')
+def create_directories():
+    if not os.path.exists(DOWNLOAD_FOLDER):
+        os.makedirs(DOWNLOAD_FOLDER)
 
-if not os.path.exists(DOWNLOAD_FOLDER):
-    os.makedirs(DOWNLOAD_FOLDER)
-
-if not os.path.exists(OUTPUT_FOLDER):
-    os.makedirs(OUTPUT_FOLDER)
+    if not os.path.exists(OUTPUT_FOLDER):
+        os.makedirs(OUTPUT_FOLDER)
 
 def clean_directories():
     for folder in [DOWNLOAD_FOLDER]:
@@ -32,6 +32,8 @@ def clean_filename(filename):
     valid_chars = "-_.() %s%s" % (string.ascii_letters, string.digits)
     cleaned_filename = ''.join(c for c in filename if c in valid_chars)
     return cleaned_filename
+
+app = Flask(__name__)
 
 @app.route('/')
 def home():
@@ -117,7 +119,11 @@ def download_audio():
         audio_path = os.path.join(DOWNLOAD_FOLDER, audio_filename)
         output_path = os.path.join(OUTPUT_FOLDER, output_filename)
 
-        audio_stream = yt.streams.filter(only_audio=True, adaptive=True).first()
+        # Fetch the audio stream with the highest bitrate
+        audio_stream = yt.streams.filter(only_audio=True, adaptive=True).order_by('abr').desc().first()
+        if not audio_stream:
+            return jsonify({'error': 'No suitable audio stream found'}), 404
+
         audio_stream.download(filename=audio_filename, output_path=DOWNLOAD_FOLDER)
 
         subprocess.run([
@@ -134,6 +140,8 @@ def download_audio():
         app.logger.error(f'Error downloading audio: {str(e)}')
         return jsonify({'error': str(e)}), 500
 
+
+
 @app.route('/downloads/<filename>', methods=['GET'])
 def download_file(filename):
     safe_filename = clean_filename(filename)
@@ -145,4 +153,11 @@ def download_file(filename):
         return 'File not found', 404
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=25565)
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--create-dirs', action='store_true', help='Create necessary directories')
+    args = parser.parse_args()
+
+    if args.create_dirs:
+        create_directories()
+    else:
+        app.run(host='0.0.0.0', port=25565)

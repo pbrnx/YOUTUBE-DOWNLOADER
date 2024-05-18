@@ -1,6 +1,10 @@
+ 
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+  
   body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f7f7f7;
+    font-family: "Open Sans", sans-serif;
+    background-color: #ffffff;
     text-align: center;
     padding-top: 50px;
     zoom:100%;
