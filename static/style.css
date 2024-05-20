@@ -6,8 +6,8 @@
     font-family: "Open Sans", sans-serif;
     background-color: #ffffff;
     text-align: center;
-    padding-top: 50px;
-    zoom:100%;
+    margin: 0;
+    padding: 0;
   }
 
   #videoThumbnail{
@@ -22,13 +22,14 @@
     margin-bottom: 10px;
     border: 1px solid #ddd;
     border-radius: 10px;
+    margin-top:2% ;
   }
 
-  #fetchResolutionsButton, #downloadButton, #downloadAudioButton {
+  #fetchResolutionsButton, #downloadButton, #downloadAudioButton, #youtubeSearchButton {
     padding: 10px 20px;
     background-color: #1a8cff;
     color: white;
-    border: none;
+    border-width: 0.5px;
     border-radius: 10px;
     cursor: pointer;
     transition: transform 0.3s ease;
@@ -37,18 +38,33 @@
   }
 
 
-  #fetchResolutionsButton:hover, #downloadButton:hover, #downloadAudioButton:hover {
+
+ #searchResultsDropdown {
+    padding: 8px 10px;
+    margin-top: 10px;
+    width: 300px; 
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    display: block;
+}
+
+
+
+  
+
+
+  #fetchResolutionsButton:hover, #downloadButton:hover, #downloadAudioButton:hover, #youtubeSearchButton:hover {
     background-color: #00458a;
     transform: scale(1.05)
   }
 
   #resolutionList {
-    list-style: none; /* Remove os marcadores de lista padrão */
+    list-style: none; 
     padding: 0;
   }
 
   #resolutionList li {
-    display: inline; /* Display list items inline */
+    display: inline;
     margin-right: 10px;
   }
 
@@ -58,20 +74,19 @@
   }
 
 #progressContainer {
-    width: 300px; /* Mesma largura da imagem ou do campo de texto */
+    width: 300px; 
     background-color: #ddd;
     border-radius: 4px;
-    margin: 20px auto; /* Adiciona margem automática nos lados para centralizar */
-    overflow: hidden; /* Garante que a barra interna não ultrapasse as bordas arredondadas */
+    margin: 20px auto; 
+    overflow: hidden; 
 }
 
 
 #progressBar {
     height: 20px;
     background-color: #1a8cff;
-    width: 0%; /* Inicializa a barra de progresso com 0% */
-    transition: width 0.5s ease; /* Suaviza a transição da largura */
-    position: relative;
+    width: 0%; 
+    transition: width 0.5s ease; 
 }
 
 footer {
@@ -91,8 +106,8 @@ footer {
 }
 
 .social-icon img {
-    width: 30px; /* Adjust size as needed */
-    height: 30px; /* Adjust size as needed */
+    width: 30px; 
+    height: 30px; 
     margin: 0 10px;
     transition: transform 0.5s ease;
     padding-left: 25px; 
@@ -124,6 +139,136 @@ margin: 25px;
 .resolution-button.active, .resolution-button:hover {
     background-color: #00458a;
     
+
+
+}
+
+
+.site-header {
+    background-color: #1a8cff; 
+    padding: 10px 20px; 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.header-content {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo-container .logo {
+    width: 100px; 
+    height: auto;
+}
+
+.search-form {
+    display: flex;
+    align-items: center;
+}
+
+#youtubeSearchInput {
+    padding: 8px 10px;
+    margin-right: 10px;
+    border: 2px solid #ffffff;
+    border-radius: 5px;
+    outline: none;
+    width: 52.5%; 
+}
+
+
+
+#youtubeSearchButton:hover {
+    background-color: #00458a;
+    color: #ffffff;
+}
+
+.results-container {
+    margin-top: 10px;
+    text-align: left;
+}
+
+.video-result {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 5px; 
+}
+
+.video-result:hover {
+    background-color: #f0f0f0; 
+}
+
+.video-thumbnail {
+    width: 50px; 
+    height: auto;
+    margin-right: 10px; 
+}
+
+.video-title {
+    font-size: 14px; 
+
+}
+
+.header-content {
+    position: relative;
+}
+
+.results-container {
+    position: absolute;
+    top: 100%; 
+    left: auto; 
+    width: 300px; 
+    background: white;
+    z-index: 1000;
+    display: none; 
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    overflow-y: auto; 
+    max-height: 400px; 
+}
+
+.video-result {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 10px;
+    cursor: pointer;
+    border-bottom: 1px solid #ccc;
+}
+
+.video-result:hover {
+    background-color: #f0f0f0;
+}
+
+.video-thumbnail {
+    width: 50px;
+    height: auto;
+    margin-right: 10px;
+}
+
+.video-title {
+    font-size: 14px;
+    flex-grow: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@media (max-width:768px){
+    #youtubeSearchButton{
+        margin-top: 3%;
+    }
+
+    .results-container {
+
+    width: 250px; 
+
+}
 }
 
 
