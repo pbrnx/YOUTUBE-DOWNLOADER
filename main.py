@@ -44,7 +44,8 @@ def get_resolutions():
     url = request.form.get('url')
     if not url:
         return jsonify({'error': 'Missing URL'}), 400
-    
+        
+
     try:
         yt = YouTube(url)
         video_streams = yt.streams.filter(only_video=True).order_by('resolution').desc()

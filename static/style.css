@@ -1,275 +1,266 @@
- 
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
-
-  
-  body {
-    font-family: "Open Sans", sans-serif;
-    background-color: #ffffff;
-    text-align: center;
-    margin: 0;
-    padding: 0;
-  }
-
-  #videoThumbnail{
-    width: 400px;
-    border-radius: 20px;
-
-  }
-
-  #youtubeUrl {
-    width: 300px;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    margin-top:2% ;
-  }
-
-  #fetchResolutionsButton, #downloadButton, #downloadAudioButton, #youtubeSearchButton {
-    padding: 10px 20px;
-    background-color: #1a8cff;
-    color: white;
-    border-width: 0.5px;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-    margin: 0 10px;
-    
-  }
-
-
-
- #searchResultsDropdown {
-    padding: 8px 10px;
-    margin-top: 10px;
-    width: 300px; 
-    border: 2px solid #ddd;
-    border-radius: 5px;
-    display: block;
+@font-face {
+  font-family: 'SF-Pro';
+  src: url('/assets/SF-Pro.ttf') format('opentype');
 }
 
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  zoom: 100%;
+}
 
+html, button, body, h3 {
+  font-family: sans-serif;
+  font-weight: 100;
+}
 
-  
+h3 {
+  font-size: 24px;
+}
 
+#videoThumbnail {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 20px;
+}
 
-  #fetchResolutionsButton:hover, #downloadButton:hover, #downloadAudioButton:hover, #youtubeSearchButton:hover {
-    background-color: #00458a;
-    transform: scale(1.05)
-  }
+#youtubeUrl {
+  width: 80%;
+  max-width: 300px;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  margin-top: 2%;
+}
 
-  #resolutionList {
-    list-style: none; 
-    padding: 0;
-  }
+#fetchResolutionsButton, #downloadButton, #downloadAudioButton, #youtubeSearchButton {
+  padding: 10px 20px;
+  background-color: #1a8cff;
+  color: white;
+  border-width: 0.5px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  margin: 10px;
+}
 
-  #resolutionList li {
-    display: inline;
-    margin-right: 10px;
-  }
+#fetchResolutionsButton:hover, #downloadButton:hover, #downloadAudioButton:hover, #youtubeSearchButton:hover {
+  background-color: #00458a;
+  transform: scale(1.05);
+}
 
-  #message {
-    margin-top: 20px;
-    margin-bottom:200px;
-  }
+#resolutionList {
+  list-style: none;
+  padding: 0;
+}
+
+#resolutionList li {
+  display: inline;
+  margin-right: 10px;
+}
+
+#message {
+  margin-top: 20px;
+}
+
+#main {
+  padding-bottom: 200px;
+}
 
 #progressContainer {
-    width: 300px; 
-    background-color: #ddd;
-    border-radius: 4px;
-    margin: 20px auto; 
-    overflow: hidden; 
+  width: 80%;
+  max-width: 300px;
+  background-color: #ddd;
+  border-radius: 4px;
+  margin: 20px auto;
+  overflow: hidden;
 }
 
-
 #progressBar {
-    height: 20px;
-    background-color: #1a8cff;
-    width: 0%; 
-    transition: width 0.5s ease; 
+  height: 20px;
+  background-color: #1a8cff;
+  width: 0%;
+  transition: width 0.5s ease;
 }
 
 footer {
-    width: 100%;
-    background-color: #393939;
-    color: #ffffff;
-    text-align: center;
-    padding: 20px 0;
-    position: fixed;
-    bottom: 0;
-    left: 0;
+  width: 100%;
+  background-color: #393939;
+  color: #ffffff;
+  text-align: center;
+  padding: 20px 0;
+  position: fixed;
+  bottom: 0;
+  left: 0;
 }
 
 .footer-content a {
-    display: inline-block;
-    text-decoration: none;
+  display: inline-block;
+  text-decoration: none;
+  padding-left: 2%;
 }
 
 .social-icon img {
-    width: 30px; 
-    height: 30px; 
-    margin: 0 10px;
-    transition: transform 0.5s ease;
-    padding-left: 25px; 
-    padding-right: 25px;
+  width: 30px;
+  height: 30px;
+  margin: 0 10px;
+  transition: transform 0.5s ease;
 }
 
 .social-icon:hover img {
-    transform: scale(1.4);
+  transform: scale(1.4);
 }
-
-
 
 #listContainer {
-margin: 25px;
+  margin: 25px;
 }
 
-
 .resolution-button {
-    padding: 10px 10px;
-    margin: 5px;
-    background-color: #1a8cff;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
+  padding: 10px 10px;
+  margin: 5px;
+  background-color: #1a8cff;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
 .resolution-button.active, .resolution-button:hover {
-    background-color: #00458a;
-    
-
-
+  background-color: #00458a;
 }
 
-
 .site-header {
-    background-color: #1a8cff; 
-    padding: 10px 20px; 
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
+  background-color: #1a8cff;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .header-content {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .logo-container .logo {
-    width: 100px; 
-    height: auto;
+  width: 100px;
+  height: auto;
 }
 
 .search-form {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 #youtubeSearchInput {
-    padding: 8px 10px;
-    margin-right: 10px;
-    border: 2px solid #ffffff;
-    border-radius: 5px;
-    outline: none;
-    width: 52.5%; 
+  padding: 8px 10px;
+  margin-right: 10px;
+  border: 2px solid #ffffff;
+  border-radius: 5px;
+  outline: none;
+  width: 52.5%;
 }
 
-
-
 #youtubeSearchButton:hover {
-    background-color: #00458a;
-    color: #ffffff;
+  background-color: #00458a;
+  color: #ffffff;
 }
 
 .results-container {
-    margin-top: 10px;
-    text-align: left;
+  margin-top: 10px;
+  text-align: left;
 }
 
 .video-result {
-    display: flex;
-    align-items: center;
-    padding: 10px;
-    cursor: pointer;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    margin-bottom: 5px; 
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 5px;
 }
 
 .video-result:hover {
-    background-color: #f0f0f0; 
+  background-color: #f0f0f0;
 }
 
 .video-thumbnail {
-    width: 50px; 
-    height: auto;
-    margin-right: 10px; 
+  width: 50px;
+  height: auto;
+  margin-right: 10px;
 }
 
 .video-title {
-    font-size: 14px; 
-
+  font-size: 200px;
 }
 
 .header-content {
-    position: relative;
+  position: relative;
 }
 
 .results-container {
-    position: absolute;
-    top: 100%; 
-    left: auto; 
-    width: 300px; 
-    background: white;
-    z-index: 1000;
-    display: none; 
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    overflow-y: auto; 
-    max-height: 400px; 
+  position: absolute;
+  top: 100%;
+  left: auto;
+  width: 300px;
+  background: white;
+  z-index: 1000;
+  display: none;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  overflow-y: auto;
+  max-height: 400px;
 }
 
 .video-result {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    padding: 10px;
-    cursor: pointer;
-    border-bottom: 1px solid #ccc;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #ccc;
 }
 
 .video-result:hover {
-    background-color: #f0f0f0;
+  background-color: #f0f0f0;
 }
 
 .video-thumbnail {
-    width: 50px;
-    height: auto;
-    margin-right: 10px;
+  width: 50px;
+  height: auto;
+  margin-right: 10px;
 }
 
 .video-title {
-    font-size: 14px;
-    flex-grow: 1;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  font-size: 14px;
+  flex-grow: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-@media (max-width:768px){
-    #youtubeSearchButton{
-        margin-top: 3%;
-    }
+@media (max-width: 768px) {
+  #youtubeSearchButton {
+    margin-top: 3%;
+  }
 
-    .results-container {
+  .results-container {
+    width: 250px;
+  }
 
-    width: 250px; 
+  #progressContainer {
+    width: 90%;
+    max-width: none;
+  }
 
+  #youtubeUrl, #fetchResolutionsButton, #downloadButton, #downloadAudioButton {
+    width: 90%;
+    max-width: none;
+    margin: 10px auto;
+  }
 }
-}
-
-
-

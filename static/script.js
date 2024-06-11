@@ -137,8 +137,18 @@ document.getElementById('downloadAudioButton').onclick = function() {
 
 
 
-//api key section
-// Define the API key and API URL
+
+
+
+
+
+
+
+
+
+
+
+
 //api key section
 // Define the API key and API URL
 const API_KEY = 'AIzaSyB8rilPFTnGyPjc9Oh7CUirGNxoM1I6gCY'; //chave restrita ao domínio!
