@@ -1,10 +1,10 @@
 import os
 import argparse
 from flask import Flask, render_template, request, jsonify, send_from_directory
-from pytube import YouTube
-import subprocess
+import yt_dlp
 import string
 import shutil
+from urllib.parse import quote, unquote
 
 DOWNLOAD_FOLDER = 'downloads'
 OUTPUT_FOLDER = 'output'
@@ -17,7 +17,7 @@ def create_directories():
         os.makedirs(OUTPUT_FOLDER)
 
 def clean_directories():
-    for folder in [DOWNLOAD_FOLDER]:
+    for folder in [DOWNLOAD_FOLDER, OUTPUT_FOLDER]:
         for filename in os.listdir(folder):
             file_path = os.path.join(folder, filename)
             try:
@@ -44,20 +44,24 @@ def get_resolutions():
     url = request.form.get('url')
     if not url:
         return jsonify({'error': 'Missing URL'}), 400
-        
 
     try:
-        yt = YouTube(url)
-        video_streams = yt.streams.filter(only_video=True).order_by('resolution').desc()
-        resolutions = {stream.resolution for stream in video_streams if stream.resolution is not None}
-        
-        video_title = yt.title
-        video_thumbnail_url = yt.thumbnail_url
-        
+        ydl_opts = {
+            'quiet': True,
+            'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]',
+        }
+        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+            info = ydl.extract_info(url, download=False)
+
+        resolutions = set()
+        for format in info['formats']:
+            if format.get('vcodec') != 'none':
+                resolutions.add(format.get('height', 'unknown'))
+
         return jsonify({
-            'resolutions': list(resolutions),
-            'title': video_title,
-            'thumbnail_url': video_thumbnail_url
+            'resolutions': sorted(resolutions, reverse=True),
+            'title': info.get('title', 'Unknown Title'),
+            'thumbnail_url': info.get('thumbnail', '')
         })
     except Exception as e:
         return jsonify({'error': str(e)}), 500
@@ -70,35 +74,22 @@ def download_video():
         return jsonify({'error': 'Missing data'}), 400
 
     try:
-        yt = YouTube(url)
-        
-        base_filename = clean_filename(yt.title)
-        video_filename = f"{base_filename}_video.mp4"
-        audio_filename = f"{base_filename}_audio.mp4"
-        output_filename = f"{base_filename}_{resolution}.mp4"
+        with yt_dlp.YoutubeDL({}) as ydl:
+            info = ydl.extract_info(url, download=False)
 
-        video_path = os.path.join(DOWNLOAD_FOLDER, video_filename)
-        audio_path = os.path.join(DOWNLOAD_FOLDER, audio_filename)
+        base_filename = clean_filename(info.get('title', 'video'))
+        output_filename = f"{base_filename}_{resolution}.mp4"
         output_path = os.path.join(OUTPUT_FOLDER, output_filename)
 
-        if resolution in ['4320p', '2160p','1440p', '1080p', '480p', '240p', '144p']:  
-            video_stream = yt.streams.filter(res=resolution, only_video=True, adaptive=True).first()
-            audio_stream = yt.streams.filter(only_audio=True, adaptive=True).first()
-            video_stream.download(filename=video_filename, output_path=DOWNLOAD_FOLDER)
-            audio_stream.download(filename=audio_filename, output_path=DOWNLOAD_FOLDER)
-            subprocess.run([
-                'ffmpeg',
-                '-y',
-                '-i', video_path,
-                '-i', audio_path,
-                '-c:v', 'copy',
-                '-c:a', 'aac',
-                '-strict', 'experimental',
-                output_path
-            ], check=True)
-        else:
-            stream = yt.streams.filter(res=resolution, progressive=True).first()
-            stream.download(filename=output_filename, output_path=OUTPUT_FOLDER)
+        ydl_opts = {
+            'format': f'bestvideo[height={resolution}]+bestaudio/best',
+            'outtmpl': output_path,
+            'quiet': False,
+            'merge_output_format': 'mp4',
+        }
+
+        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+            ydl.download([url])
 
         return jsonify({'filename': output_filename})
     except Exception as e:
@@ -112,43 +103,36 @@ def download_audio():
         return jsonify({'error': 'Missing URL'}), 400
 
     try:
-        yt = YouTube(url)
-        base_filename = clean_filename(yt.title)
-        audio_filename = f"{base_filename}_audio.mp4"
-        output_filename = f"{base_filename}.mp3"
+        with yt_dlp.YoutubeDL({}) as ydl:
+            info = ydl.extract_info(url, download=False)
 
-        audio_path = os.path.join(DOWNLOAD_FOLDER, audio_filename)
+        base_filename = clean_filename(info.get('title', 'audio'))
+        output_filename = f"{base_filename}.mp3"
         output_path = os.path.join(OUTPUT_FOLDER, output_filename)
 
-        # Fetch the audio stream with the highest bitrate
-        audio_stream = yt.streams.filter(only_audio=True, adaptive=True).order_by('abr').desc().first()
-        if not audio_stream:
-            return jsonify({'error': 'No suitable audio stream found'}), 404
+        ydl_opts = {
+            'format': 'bestaudio/best',
+            'outtmpl': output_path,
+            'postprocessors': [{
+                'key': 'FFmpegExtractAudio',
+                'preferredcodec': 'mp3',
+                'preferredquality': '192',
+            }],
+        }
 
-        audio_stream.download(filename=audio_filename, output_path=DOWNLOAD_FOLDER)
-
-        subprocess.run([
-            'ffmpeg',
-            '-y',
-            '-i', audio_path,
-            '-q:a', '0',
-            '-map', 'a',
-            output_path
-        ], check=True)
+        with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+            ydl.download([url])
 
         return jsonify({'filename': output_filename})
     except Exception as e:
         app.logger.error(f'Error downloading audio: {str(e)}')
         return jsonify({'error': str(e)}), 500
 
-
-
 @app.route('/downloads/<filename>', methods=['GET'])
 def download_file(filename):
-    safe_filename = clean_filename(filename)
     try:
-        response = send_from_directory(OUTPUT_FOLDER, safe_filename, as_attachment=True)
-        clean_directories()
+        decoded_filename = unquote(filename)
+        response = send_from_directory(OUTPUT_FOLDER, decoded_filename, as_attachment=True)
         return response
     except FileNotFoundError:
         return 'File not found', 404
@@ -156,9 +140,12 @@ def download_file(filename):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--create-dirs', action='store_true', help='Create necessary directories')
+    parser.add_argument('--port', type=int, default=25565, help='Port to run the server')
     args = parser.parse_args()
 
     if args.create_dirs:
         create_directories()
     else:
-        app.run(host='0.0.0.0', port=25565)
+        port = args.port or int(os.getenv('PORT', 25565))
+        create_directories()
+        app.run(host='0.0.0.0', port=port)

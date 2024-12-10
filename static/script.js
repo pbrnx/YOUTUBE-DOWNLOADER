@@ -1,7 +1,7 @@
 function sortResolutions(resolutions) {
     const resolutionOrder = ['4320p', '2160p', '1440p', '1080p', '720p', '480p', '360p', '240p', '144p'];
-    return resolutions.sort((a, b) => {
-        return resolutionOrder.indexOf(b) - resolutionOrder.indexOf(a);
+    return resolutions.sort((b, a) => {
+        return resolutionOrder.indexOf(a) - resolutionOrder.indexOf(b);
     });
 }
 
