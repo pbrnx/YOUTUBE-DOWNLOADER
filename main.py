@@ -148,4 +148,4 @@ if __name__ == '__main__':
     else:
         port = args.port or int(os.getenv('PORT', 25565))
         create_directories()
-        app.run(host='0.0.0.0', port=port)
+        app.run(host='localhost', port=port)
