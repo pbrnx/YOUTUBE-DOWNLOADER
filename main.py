@@ -47,6 +47,7 @@ def get_resolutions():
 
     try:
         ydl_opts = {
+            'cookiefile': 'cookies.txt',
             'default_search': 'ytsearch',
             'quiet': True,
             'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]',
@@ -88,6 +89,7 @@ def download_video():
             'outtmpl': output_path,
             'quiet': False,
             'merge_output_format': 'mp4',
+            'cookiefile': 'cookies.txt'
         }
 
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
@@ -120,6 +122,7 @@ def download_audio():
                 'preferredcodec': 'mp3',
                 'preferredquality': '192',
             }],
+            'cookiefile': 'cookies.txt'
         }
 
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
