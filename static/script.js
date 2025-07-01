@@ -49,7 +49,6 @@ document.getElementById('fetchResolutionsButton').onclick = function() {
             });
             document.getElementById('downloadButton').style.display = 'inline-block';
             document.getElementById('downloadAudioButton').style.display = 'inline-block';
-
             document.getElementById('videoTitle').textContent = resolutionsData.title;
             document.getElementById('videoThumbnail').src = resolutionsData.thumbnail_url;
         }
@@ -64,7 +63,6 @@ document.getElementById('fetchResolutionsButton').onclick = function() {
 document.getElementById('downloadButton').onclick = function() {
     var url = document.getElementById('youtubeUrl').value;
     var resolution = document.querySelector('.resolution-button.active').textContent;
-
     document.getElementById('message').textContent = 'Processing download...';
     document.getElementById('progressContainer').style.display = 'block';
     document.getElementById('progressBar').style.width = '0%';
@@ -100,7 +98,6 @@ document.getElementById('downloadButton').onclick = function() {
 
 document.getElementById('downloadAudioButton').onclick = function() {
     var url = document.getElementById('youtubeUrl').value;
-
     document.getElementById('message').textContent = 'Processing audio download...';
     document.getElementById('progressContainer').style.display = 'block';
     document.getElementById('progressBar').style.width = '0%';

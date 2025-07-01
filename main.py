@@ -47,8 +47,10 @@ def get_resolutions():
 
     try:
         ydl_opts = {
+            'default_search': 'ytsearch',
             'quiet': True,
             'format': 'bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]',
+            
         }
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
             info = ydl.extract_info(url, download=False)
